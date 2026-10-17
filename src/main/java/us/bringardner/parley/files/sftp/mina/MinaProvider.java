@@ -47,7 +47,7 @@ public class MinaProvider implements SshProvider {
 	@Override
 	public SshConnection connect(SshSettings s) throws IOException {
 		if( s.isUseAgent() ) {
-			throw new IOException("The mina SSH provider can't log in with an ssh-agent (auth=Agent): use a password or a private key, or another provider, such as parley (us.bringardner.parley:parley-files-sftp-parley).");
+			throw new IOException("The mina SSH provider can't log in with an ssh-agent (auth=Agent): use a password or a private key, or another provider, such as parley (us.bringardner.parley:parley-files-sftp-parley-ssh).");
 		}
 		// One client per connection: the host-key policy is set on the client,
 		// and it differs between connections.

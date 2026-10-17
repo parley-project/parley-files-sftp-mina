@@ -19,7 +19,7 @@ On the class path it is used when it is the only provider there, or when it is c
 
 **This provider can't log in with an ssh-agent** (`auth=Agent`). A connection asking for it fails with an
 `IOException` that says so. Log in with a password or a private key, or use another provider (such as
-parley-files-sftp-parley) for agent login.
+parley-files-sftp-parley-ssh) for agent login.
 
 Everything else works, including writing at any position in a file in one request. Ed25519 keys work on
 Java 11 and later (with `net.i2p.crypto:eddsa`, which comes with it).
