@@ -12,7 +12,7 @@
 	</parent>
 
 	<artifactId>parley-files-sftp-mina</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<name>Parley Files SFTP: Apache MINA SSHD</name>
 	<description>The Apache MINA SSHD provider for parley-files-sftp. LIMITATION: it can't log in with an ssh-agent (auth=Agent); use a password or a key, or another provider.</description>
 
@@ -20,6 +20,8 @@
 		<!-- Written to the jar manifest as Automatic-Module-Name -->
 		<parley.moduleName>us.bringardner.parley.files.sftp.mina</parley.moduleName>
 		<parley.version>1.0.0</parley.version>
+		<!-- parley-files(-sftp) 1.1.0 add file locks -->
+		<parley-files.version>1.1.0-SNAPSHOT</parley-files.version>
 	</properties>
 
 	<!-- GitHub Packages. Maven Central releases use: mvn -Prelease clean deploy -->
@@ -72,7 +74,7 @@
 		<dependency>
 			<groupId>us.bringardner.parley</groupId>
 			<artifactId>parley-files-sftp</artifactId>
-			<version>${parley.version}</version>
+			<version>${parley-files.version}</version>
 		</dependency>
 		<!-- Apache MINA SSHD client and SFTP (sshd-core and sshd-common come with it) -->
 		<dependency>
@@ -92,14 +94,14 @@
 		<dependency>
 			<groupId>us.bringardner.parley</groupId>
 			<artifactId>parley-files-sftp</artifactId>
-			<version>${parley.version}</version>
+			<version>${parley-files.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>us.bringardner.parley</groupId>
 			<artifactId>parley-files</artifactId>
-			<version>${parley.version}</version>
+			<version>${parley-files.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
