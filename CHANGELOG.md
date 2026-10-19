@@ -1,5 +1,12 @@
 # Changelog
 
+## parley-files-sftp-mina 1.1.0 (unreleased)
+
+### Added
+
+- `sync()` (FileChannel.force()) asks the server to sync the file with `fsync@openssh.com`, when it offers
+  it, for streams and random access.
+
 ## parley-files-sftp-mina 1.0.0 (2026-10-17)
 
 The first release. The Apache MINA SSHD provider for parley-files-sftp. It was part of parley-files-sftp (package

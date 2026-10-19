@@ -116,6 +116,15 @@ class MinaSftpFile implements SftpFile {
 		MinaSftpChannel.call(path, () -> { channel.sftp.write(handle, position, b, off, len); return null; });
 	}
 
+	/** Asks the server to sync the file ({@code fsync@openssh.com}), if it offers that. */
+	@Override
+	public void sync() throws IOException {
+		MinaSftpChannel.call(path, () -> {
+			MinaSyncableOutput.fsync(channel.sftp, handle);
+			return null;
+		});
+	}
+
 	@Override
 	public void truncate(long size) throws IOException {
 		if( !writable ) {

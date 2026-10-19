@@ -252,10 +252,14 @@ class MinaSftpChannel extends AbstractSftpChannel {
 
 	@Override
 	public OutputStream write(String path, boolean append) throws IOException {
-		return call(path, () -> sftp.write(path, BUFFER_SIZE,
-				append
+		EnumSet<OpenMode> modes = append
 				? EnumSet.of(OpenMode.Write, OpenMode.Create, OpenMode.Append)
-				: EnumSet.of(OpenMode.Write, OpenMode.Create, OpenMode.Truncate)));
+				: EnumSet.of(OpenMode.Write, OpenMode.Create, OpenMode.Truncate);
+		if( sftp instanceof AbstractSftpClient ) {
+			// the same pipelined writer sftp.write gives, but Syncable (fsync@openssh.com)
+			return call(path, () -> new MinaSyncableOutput((AbstractSftpClient) sftp, BUFFER_SIZE, path, modes));
+		}
+		return call(path, () -> sftp.write(path, BUFFER_SIZE, modes));
 	}
 
 	@Override
