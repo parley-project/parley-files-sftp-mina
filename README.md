@@ -24,6 +24,13 @@ parley-files-sftp-parley-ssh) for agent login.
 Everything else works, including writing at any position in a file in one request. Ed25519 keys work on
 Java 11 and later (with `net.i2p.crypto:eddsa`, which comes with it).
 
+
+## Locks and FileChannel
+
+As parley-files-sftp describes: `PROCESS` locks, atomic `createNewFile()` (an exclusive open), `map()` of a local
+copy in `READ_ONLY` and `PRIVATE` modes, and `force()` that sends what is held, then asks the server to sync the
+file with `fsync@openssh.com` when it offers that.
+
 ## Testing
 
 `mvn verify` runs parley-files-sftp's provider test suite against this provider (the tests jar, through
