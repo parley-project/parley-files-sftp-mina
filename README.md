@@ -13,7 +13,7 @@ The [Apache MINA SSHD](https://mina.apache.org/sshd-project/) provider for [parl
 It brings parley-files-sftp with it.
 
 On the class path it is used when it is the only provider there, or when it is chosen: the
-`implementation` connection property or `-Dparley.sftp.implementation=mina`.
+`implementation` connection property or `-Dparley.files.sftp.implementation=mina`.
 
 ## Limitation: no ssh-agent login
 
@@ -34,5 +34,5 @@ file with `fsync@openssh.com` when it offers that.
 ## Testing
 
 `mvn verify` runs parley-files-sftp's provider test suite against this provider (the tests jar, through
-surefire's `dependenciesToScan`), with `parley.sftp.test.unsupported=agentLogin` in the pom: the suite skips what the library can't do, and this project's own tests: that agent login is refused with a message that says so (`MinaAgentLoginTest`). See "Testing a provider" in parley-files-sftp's README; the
-suite's server is chosen with `-Dparley.sftp.test.server` as described there.
+surefire's `dependenciesToScan`), with `parley.files.sftp.test.unsupported=agentLogin` in the pom: the suite skips what the library can't do, and this project's own tests: that agent login is refused with a message that says so (`MinaAgentLoginTest`). See "Testing a provider" in parley-files-sftp's README; the
+suite's server is chosen with `-Dparley.files.sftp.test.server` as described there.

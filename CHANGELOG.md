@@ -1,5 +1,12 @@
 # Changelog
 
+## parley-files-sftp-mina 2.0.0 (unreleased)
+
+### Changed (needs a configuration change)
+
+- The provider is chosen with `parley.files.sftp.implementation=mina` (was `parley.sftp.implementation`),
+  and the shared suite's settings are `parley.files.sftp.test.*`.
+
 ## parley-files-sftp-mina 1.1.0 (unreleased)
 
 ### Added
