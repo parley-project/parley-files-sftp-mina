@@ -2,6 +2,13 @@
 
 ## parley-files-sftp-mina 2.0.0 (unreleased)
 
+### Added (2026-11-15: running programs on the server)
+
+- **`SshConnection.start(command)`**: a command that runs while its streams are read, for
+  parley-files-sftp's `processBuilder` (connection setting `runCommands`).
+  The exec request asks the server to answer (want-reply), so a server that refuses commands makes
+  `start` throw, as with the other providers; MINA by itself only logs the refusal.
+
 ### Changed (needs a configuration change)
 
 - The provider is chosen with `parley.files.sftp.implementation=mina` (was `parley.sftp.implementation`),
