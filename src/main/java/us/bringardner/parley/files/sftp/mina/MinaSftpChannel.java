@@ -169,6 +169,28 @@ class MinaSftpChannel extends AbstractSftpChannel {
 		call(path, () -> { sftp.setStat(path, new Attributes().perms(mode & 07777)); return null; });
 	}
 
+	/** lsetstat@openssh.com, which MINA's client has no class for ({@link OpenSshLSetStat}). */
+	@Override
+	public boolean canSetLinkAttributes() throws IOException {
+		return OpenSshLSetStat.isAvailable(sftp);
+	}
+
+	@Override
+	public void setLinkAttributes(String path, Long uid, Long gid, Long accessSeconds, Long modifySeconds) throws IOException {
+		call(path, () -> {
+			Attributes a = new Attributes();
+			if( uid != null && gid != null ) {
+				a.owner((int) (long) uid, (int) (long) gid);
+			}
+			if( accessSeconds != null && modifySeconds != null ) {
+				a.accessTime(FileTime.from(accessSeconds, TimeUnit.SECONDS));
+				a.modifyTime(FileTime.from(modifySeconds, TimeUnit.SECONDS));
+			}
+			new OpenSshLSetStat(sftp).set(path, a);
+			return null;
+		});
+	}
+
 	@Override
 	public void chown(String path, long uid) throws IOException {
 		// SFTP v3 sets uid and gid together; keep the group
